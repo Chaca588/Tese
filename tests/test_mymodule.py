@@ -6,4 +6,4 @@ def test_add():
     assert add(0, 0) == 0
 
     #error
-    assert add(1, 0) == 2
+    assert add(1, 1) == 2
