@@ -30,13 +30,10 @@ jobs:
         languages: python
         # Add other languages as needed
     
-    - name: Initialize CodeQL
+    - name: Init CodeQL
       uses: github/codeql-action/init@v2
       with:
-          languages: python
-          # Override the default behavior so that the action doesn't attempt
-          # to auto-install Python dependencies
-          setup-python-dependencies: false
+        db-location: '${{ github.runner_temp }}/my_location'
 
     - name: Autobuild
       uses: github/codeql-action/autobuild@v1
