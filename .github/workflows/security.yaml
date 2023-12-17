@@ -26,6 +26,10 @@ jobs:
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
+      with:
+        languages: python
+        queries: ./codeql-queries  # Adjust based on your project structure
+        prefix: src  # Specify the prefix to the source files
 
     - name: Autobuild
       uses: github/codeql-action/autobuild@v1
