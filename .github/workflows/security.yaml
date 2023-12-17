@@ -25,7 +25,7 @@ jobs:
         pip install -r src/requirements.txt  # Adjust based on your project structure
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
+      uses: github/codeql-action/init@v2
 
     - name: Autobuild
       uses: github/codeql-action/autobuild@v1
