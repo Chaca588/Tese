@@ -1,0 +1,43 @@
+name: ZAP & CodeQL Tests
+
+on:
+    push:
+        branches:
+            main
+    workflow_dispatch:
+
+jobs:
+    CodeQL:
+        runs-on: ubuntu-lastest
+
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v2
+            
+            - name: Set up Python
+              uses: actions/setup-python@v2
+              with:
+                python-version: 3.11
+            
+            - name: Install dependencies
+              run: |
+                python -m pip install --upgrade pip
+                pip install -r requirements.txt  # Adjust based on your project structure
+
+            - name: Initialize CodeQL
+              uses: github/codeql-action/init@v1
+
+            - name: Autobuild
+              uses: github/codeql-action/autobuild@v1
+              with:
+                language: python
+
+            - name: Analyze
+              uses: github/codeql-action/analyze@v1
+              with:
+                language: python
+
+            - name: Upload CodeQL results
+              uses: github/codeql-action/upload-sarif@v1
+              with:
+                sarif_file: codeql-sarif.sarif
