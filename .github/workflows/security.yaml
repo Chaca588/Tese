@@ -26,17 +26,15 @@ jobs:
     
     - name: Init CodeQL
       uses: github/codeql-action/init@v2
-      with:
-        db-location: '${{ github.runner_temp }}/my_location'
 
     - name: Autobuild
-      uses: github/codeql-action/autobuild@v1
+      uses: github/codeql-action/autobuild@v2
       with:
         language: python
         root-directory: src  # Specify the root directory for analysis
 
     - name: Analyze
-      uses: github/codeql-action/analyze@v1
+      uses: github/codeql-action/analyze@v2
       with:
         language: python
         root-directory: src  # Specify the root directory for analysis
