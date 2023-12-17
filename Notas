@@ -1,0 +1,3 @@
+comando do zap:
+docker run --network host -v $(pwd):/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py \                                            ✔ 
+    -t http://127.0.0.1:5000 -g gen.conf -r testreport.html
