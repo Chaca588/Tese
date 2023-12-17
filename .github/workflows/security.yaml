@@ -1,43 +1,45 @@
-name: ZAP & CodeQL Tests
+name: CodeQL Testing
 
 on:
-    push:
-        branches:
-            main
-    workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-    CodeQL:
-        runs-on: ubuntu-lastest
+  build:
 
-        steps:
-            - name: Checkout Code
-              uses: actions/checkout@v2
-            
-            - name: Set up Python
-              uses: actions/setup-python@v2
-              with:
-                python-version: 3.11
-            
-            - name: Install dependencies
-              run: |
-                python -m pip install --upgrade pip
-                pip install -r requirements.txt  # Adjust based on your project structure
+    runs-on: ubuntu-latest
 
-            - name: Initialize CodeQL
-              uses: github/codeql-action/init@v1
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-            - name: Autobuild
-              uses: github/codeql-action/autobuild@v1
-              with:
-                language: python
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.11  # Replace '3.x' with your desired Python version
 
-            - name: Analyze
-              uses: github/codeql-action/analyze@v1
-              with:
-                language: python
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r src/requirements.txt  # Adjust based on your project structure
 
-            - name: Upload CodeQL results
-              uses: github/codeql-action/upload-sarif@v1
-              with:
-                sarif_file: codeql-sarif.sarif
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v1
+      with:
+        language: python
+        root-directory: src  # Specify the root directory for analysis
+
+    - name: Analyze
+      uses: github/codeql-action/analyze@v1
+      with:
+        language: python
+        root-directory: src  # Specify the root directory for analysis
+
+    - name: Upload CodeQL results
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: codeql-sarif.sarif
